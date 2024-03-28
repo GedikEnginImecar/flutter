@@ -141,6 +141,96 @@ void main() {
 }
 ```
 
+adding text styling:
+
+```dart
+body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 255, 0, 0),
+                Color.fromARGB(255, 255, 255, 0),
+                Color.fromARGB(255, 0, 255, 0),
+                Color.fromARGB(255, 0, 255, 255),
+                Color.fromARGB(255, 0, 0, 255),
+                Color.fromARGB(255, 255, 0, 255),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: const Center(
+            child: Text(
+              "Test Content",
+              style: TextStyle(
+                backgroundColor: Color.fromARGB(255, 154, 173, 152),
+                color: Color.fromARGB(255, 255, 255, 255),
+              ),
+            ),
+          ),
+        ),
+```
+
+better practice for creating and managing widgets is to isolate them, similar to how kiss and solid programming principles work. create a structure that is usable and consistent and keep it modular so it can be reused
+
+to do this you would need to take a smaller section of the tree i.e. container, and break it up into smaller branches which leads to classes and custom widgets:
+
+###### classes and custom widgets
+
+classes are used to separate widget trees from the main code to make it modular. similar to solid and kiss programming principles. having one module for background allows you to use it in different apps, different pages of the same app, different containers within one page of the app etc.
+makes it easier to access and manipulate the data and appearance as the code is present and can just be called as opposed to being rewritten and adapting
+
+i.e. separating container for background from main:
+
+```dart
+import "package:flutter/material.dart";
+
+void main() {
+  runApp(
+    const MaterialApp(
+      home: Scaffold(
+        body: GradientContainer(),
+      ),
+    ),
+  );
+}
+
+// create a class so you can create your own widgets
+// GradientContainer inherits from StatelessWidget (provided by flutter), forces you to follow the StatelessWidget class constraints
+class GradientContainer extends StatelessWidget {
+  const GradientContainer({super.key});
+
+  @override // not required but makes it clear to override a method that is expected by StatelessWidget
+  Widget build(context) {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 255, 0, 0),
+            Color.fromARGB(255, 255, 255, 0),
+            Color.fromARGB(255, 0, 255, 0),
+            Color.fromARGB(255, 0, 255, 255),
+            Color.fromARGB(255, 0, 0, 255),
+            Color.fromARGB(255, 255, 0, 255),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: const Center(
+        child: Text(
+          "Test Content",
+          style: TextStyle(
+            backgroundColor: Color.fromARGB(255, 154, 173, 152),
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+        ),
+      ),
+    );
+  } // Widget is the data type returned, context will receive context parameters (target), build is called automatically by flutter similar to main when rendering interface
+}
+```
+
 ---
 
 ## misc
