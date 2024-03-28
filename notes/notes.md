@@ -231,6 +231,15 @@ class GradientContainer extends StatelessWidget {
 }
 ```
 
+an even better practice is to split up code across multiple files
+makes it easier to manipulate and work on files as well as keeping the files lean
+
+looking at file structure and imports:
+
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+
 ---
 
 ## misc
