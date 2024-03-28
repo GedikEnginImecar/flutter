@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
 
 class StyledText extends StatelessWidget {
-  StyledText(this.displayText, {super.key});
+  const StyledText(this.displayText, {super.key});
+  // this is the positional argument approach
   // this.displayText allows you to make the parameter being passed available as a class variable
   // however even if you leave it as just String displayText, flutter automatically looks for class variables based on the variable name
   // and assigns them automatically
