@@ -33,8 +33,6 @@ Customizable and easy to extend on top of base code/ideas
 if you want to publish/release the app for a specific platform the files within the directory become relevant then i.e:
 ![alt text](image.png)
 
-#
-
 flutter apps become active by the following steps:
 
 1. main() gets called automatically
@@ -83,6 +81,8 @@ dart is a type safe language, all values are a certain type such as string, int,
 | "Hello world!" | string, object              |
 | 29             | int, num, object            |
 | MaterialApp    | MaterialApp, widget, object |
+
+###### styling
 
 to add a basic and simple background color:
 
@@ -373,6 +373,260 @@ void main() {
 }
 ```
 
+###### classes and custom widgets 2
+
+there can be multiple constructors within a class, with its own respective properties such as:
+
+simple main.dart file
+
+```dart
+import "package:flutter/material.dart";
+import "package:first_app/gradient_container.dart";
+
+void main() {
+  runApp(
+    const MaterialApp(
+      home: Scaffold(
+        // body: GradientContainer.red(),
+        // body: GradientContainer.green(),
+        body: GradientContainer.blue(),
+      ),
+    ),
+  );
+}
+
+```
+
+and the relevant gradient file:
+
+```dart
+import "package:flutter/material.dart";
+import "package:first_app/styled_text.dart";
+
+const startAlignment = Alignment.topLeft;
+const endAlignment = Alignment.bottomRight;
+
+class GradientContainer extends StatelessWidget {
+  const GradientContainer(this.color1, this.color2, this.color3, this.color4,
+      this.color5, this.color6,
+      {super.key});
+
+// uses constructor classes with set values to make it easier to specify the background we want
+  const GradientContainer.red({super.key})
+      : color1 = const Color.fromARGB(255, 179, 0, 0),
+        color2 = const Color.fromARGB(255, 204, 0, 0),
+        color3 = const Color.fromARGB(255, 230, 0, 0),
+        color4 = const Color.fromARGB(255, 255, 0, 0),
+        color5 = const Color.fromARGB(255, 255, 26, 26),
+        color6 = const Color.fromARGB(255, 255, 51, 51);
+
+  const GradientContainer.green({super.key})
+      : color1 = const Color.fromARGB(255, 0, 179, 0),
+        color2 = const Color.fromARGB(255, 0, 204, 0),
+        color3 = const Color.fromARGB(255, 0, 230, 0),
+        color4 = const Color.fromARGB(255, 0, 255, 0),
+        color5 = const Color.fromARGB(255, 26, 255, 26),
+        color6 = const Color.fromARGB(255, 51, 255, 51);
+
+  const GradientContainer.blue({super.key})
+      : color1 = const Color.fromARGB(255, 0, 0, 179),
+        color2 = const Color.fromARGB(255, 0, 0, 204),
+        color3 = const Color.fromARGB(255, 0, 0, 230),
+        color4 = const Color.fromARGB(255, 0, 0, 255),
+        color5 = const Color.fromARGB(255, 26, 26, 255),
+        color6 = const Color.fromARGB(255, 51, 51, 255);
+
+  final Color color1;
+  final Color color2;
+  final Color color3;
+  final Color color4;
+  final Color color5;
+  final Color color6;
+
+  @override
+  Widget build(context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [color1, color2, color3, color4, color5, color6],
+          begin: startAlignment,
+          end: endAlignment,
+        ),
+      ),
+      child: const Center(
+        child: StyledText("test"),
+      ),
+    );
+  }
+}
+
+```
+
+depending on what the user chooses from main.dart as their GradientContainer.<color>, the gradient will be set based on the values of color from the appropriate options of the multiple constructors present within the gradient class
+
+###### adding assets
+
+to add assets you would ideally create a new folder within project folder called assets, since we are using images, another subfolder called images
+![alt text](image-7.png)
+
+inside the pubspec.yaml file, there is a section that looks like this:
+![alt text](image-8.png)
+
+change it to target your image assets:
+![alt text](image-9.png)
+
+specify their path, and with the correct vs extension you should even be able to see a preview of the image
+
+how to add an image, and ratio the size based on screen dimensions:
+
+```dart
+  @override
+  Widget build(context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: colorList,
+          begin: startAlignment,
+          end: endAlignment,
+        ),
+      ),
+      child: Center(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.5, // 50% of screen width
+          height:
+              MediaQuery.of(context).size.height * 0.5, // 50% of screen height
+          child: Image.asset("assets/images/dice-2.png"),
+        ),
+      ),
+    );
+  }
+```
+
+###### buttons and actions
+
+```dart
+//different types of generic flutter buttons that are built in:
+
+  ElevatedButton(onPressed: onPressed, child: child), // button with background and shadow
+
+  OutlinedButton(onPressed: onPressed, child: child), // no background but yes border
+
+  TextButton(onPressed: onPressed, child: child), // pressable text only
+```
+
+onPressed wants a function to call upon button trigger or null
+child wants another widget that is wrapped inside the button, such as a text widget
+
+```dart
+// different ways to handle onPressed
+// method 1 - create an anonymous function
+ElevatedButton(onPressed: () {
+  // code goes in here for the anonymous function
+}, child: const Text("Roll the die!"))
+
+//method 2 - create a regular function
+void randomFunction (){
+  // code here
+};
+
+// other code
+
+ElevatedButton(onPressed: randomFunction, child: const Text("Roll the die!"))
+```
+
+depending on what the button action does, especially if you execute a change that is requiring a reload of a widget, you need to look at StatefulWidget
+
+###### StatefulWidget and StatelessWidget
+
+a stateless widget is used when the values are defined, images and parameters are known, when not many active changes need to be made. it is loaded and then left as it is
+
+however if there is a state change, such as rolling a new dice when a button is triggered, you need to use StatefulWidget to be able to reload the relevant widget tree and components
+
+the logic behind a stateful widget is it is broken up into 2 sections
+
+an example regarding it being implemented would be:
+
+```dart
+// dice_roller.dart
+import 'package:flutter/material.dart';
+
+// creates the StatefulWidget class for DiceRoller
+class DiceRoller extends StatefulWidget {
+  const DiceRoller({super.key});
+
+  @override
+  State<DiceRoller> createState() { // it creates the initial state to be shown
+    return _DiceRollerState(); // calls the private _DiceRollerState function
+  }
+}
+
+class _DiceRollerState extends State<DiceRoller> { // this is where the State of the widget is set
+  var activeDiceFace = "assets/images/dice-2.png"; // default state
+
+  void rollDice() {
+    setState(() { // the actual state changing function - uses an anonymous function to do this within rollDice function (which is the function that is called from the button)
+      activeDiceFace = "assets/images/dice-4.png"; // reassignment
+    });
+  }
+
+  @override
+  Widget build(context) {
+    return Column(
+      mainAxisSize: MainAxisSize
+          .min, // forces the column height to be the minimum required (helps with vertical centering)
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.5, // 50% of screen width
+          height:
+              MediaQuery.of(context).size.height * 0.5, // 50% of screen height
+          child: Image.asset(activeDiceFace),
+        ),
+        ElevatedButton( // button with different styling options, padding, text color, 50/255 opacity, font size
+            onPressed: rollDice, // calls the function
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.all(20),
+              foregroundColor: Colors.white,
+              backgroundColor: const Color.fromARGB(50, 0, 0, 0),
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            child: const Text("Roll the die!")),
+      ],
+    );
+  }
+}
+
+
+// gradient_container.dart - file that has the button widget
+import "package:flutter/material.dart";
+import "package:first_app/dice_roller.dart";
+
+const startAlignment = Alignment.topLeft;
+const endAlignment = Alignment.bottomRight;
+
+class GradientContainer extends StatelessWidget {
+  const GradientContainer({super.key, required this.colorList});
+
+  final List<Color> colorList;
+
+  @override
+  Widget build(context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: colorList,
+          begin: startAlignment,
+          end: endAlignment,
+        ),
+      ),
+      child: const Center(
+        child: DiceRoller(), // calling the button widget to exist
+      ),
+    );
+  }
+}
+
+```
+
 ---
 
 ## misc
@@ -383,3 +637,7 @@ select widget, right click and choose refactor, it gives you smart suggestions
 
 add commas to the end of brackets and format document to get it auto commented to some extent and amended structure
 ![alt text](image-2.png)
+
+```
+
+```
