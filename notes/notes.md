@@ -240,6 +240,61 @@ looking at file structure and imports:
 ![alt text](image-5.png)
 ![alt text](image-6.png)
 
+###### variables
+
+use final to restrict the value of variables, or const to prevent interference
+const is compile time variable so it prevents it from being assigned later
+final is more suitable for when there is a value that will come for it later on, i.e. final startAlignment = calcDeviceScreen(),
+this allows it to be assigned a final value after it is passed in a value instead of being restricted from compile
+final startAlignment = Alignment.topLeft;
+final endAlignment = Alignment.bottomRight;
+
+```dart
+// suitable for changing variables
+var startAlignment = Alignment.topLeft;
+var endAlignment = Alignment.bottomRight;
+
+// for variables/values that are defined and wont change at run time
+const startAlignment = Alignment.topLeft;
+const endAlignment = Alignment.bottomRight;
+
+// for variables that should not be changing but will get their assignments after run time
+final startAlignment = Alignment.topLeft;
+final endAlignment = Alignment.bottomRight;
+```
+
+when passing variables from file to file/method to method, you need to make it such that the target method has a constructor able to accept the parameter being passed in:
+
+also uses this.var1 to help declare class variables and their assignment, use case and example final declaration for a string variable
+
+```dart
+class StyledText extends StatelessWidget {
+  StyledText(this.displayText, {super.key});
+  // this.displayText allows you to make the parameter being passed available as a class variable
+  // however even if you leave it as just String displayText, flutter automatically looks for class variables based on the variable name
+  // and assigns them automatically
+  // it can no longer be a const as it has a value being passed into it which means it can change
+
+  final String displayText;
+  // as you do not plan on reassigning the variables, you can specify the type as final String
+
+  @override
+  Widget build(context) {
+    // it can no longer be returning a const Text
+    // as it has a value being passed into it which means it can change
+    return Text(
+      displayText,
+      // so the new const is the style
+      style: const TextStyle(
+        backgroundColor: Color.fromARGB(255, 154, 173, 152),
+        color: Color.fromARGB(255, 255, 255, 255),
+      ),
+    );
+  }
+}
+
+```
+
 ---
 
 ## misc

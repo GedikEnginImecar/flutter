@@ -1,6 +1,9 @@
 import "package:flutter/material.dart";
 import "package:first_app/styled_text.dart";
 
+const startAlignment = Alignment.topLeft;
+const endAlignment = Alignment.bottomRight;
+
 // create a class so you can create your own widgets
 // GradientContainer inherits from StatelessWidget (provided by flutter), forces you to follow the StatelessWidget class constraints
 class GradientContainer extends StatelessWidget {
@@ -21,12 +24,12 @@ class GradientContainer extends StatelessWidget {
             Color.fromARGB(255, 0, 0, 255),
             Color.fromARGB(255, 255, 0, 255),
           ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+          begin: startAlignment,
+          end: endAlignment,
         ),
       ),
-      child: const Center(
-        child: StyledText(),
+      child: Center(
+        child: StyledText("test"),
       ),
     );
   } // Widget is the data type returned, context will receive context parameters (target), build is called automatically by flutter similar to main when rendering interface
