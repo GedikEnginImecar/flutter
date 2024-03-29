@@ -3,6 +3,7 @@ import "package:first_app/gradient_container.dart";
 // you need to import dependencies (flutter built in one to get started at least)
 // they are imported/downloaded in the pubspec.yaml file in dev and regular dependencies
 
+// color list to pass into gradient
 const List<Color> colorList = [
   Color.fromARGB(255, 255, 0, 0),
   Color.fromARGB(255, 255, 255, 0),
