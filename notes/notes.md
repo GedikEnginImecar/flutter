@@ -900,6 +900,59 @@ you may need to create initialization methods to help order and manage the funct
 
 ![alt text](.\images\image-14.png)
 
+you can use ternary expressions within a child to check a condition
+a ternary expression in dart and other languages is a feature/concept, which allows you to check a condition and yield a value if a condition is met and yield another value if it is not met
+
+an example:
+
+```dart
+class _QuizState extends State<Quiz> {
+  var activeScreen = "start-screen"; // mapping active screen to a string
+
+  void switchScreen() {
+    setState(() {
+      activeScreen =
+          "question-screen"; // mapping the new active screen to question screen, its easier to read and digest as a human
+    });
+  }
+
+  @override
+  Widget build(context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 78, 13, 151),
+                Color.fromARGB(255, 107, 15, 168),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: activeScreen == "start-screen"
+              ? StartScreen(switchScreen)
+              : const QuestionScreen(),
+          // yields true (bool value) if activeScreen is equal to "start-screen", it checks if a condition is met
+        ),
+      ),
+    );
+  }
+}
+```
+
+example usage/breakdown is:
+
+```dart
+          child: activeScreen == "start-screen" // <-- the condition to check for
+          // after the question mark the actions
+              ? StartScreen(switchScreen) // <-- if true StartScreen(switchScreen)
+              : const QuestionScreen(), // <-- if false, QuestionScreen pointer is called
+```
+
+and the result of the condition check is passed into the child argument, if true StartScreen(switchScreen) is passed into child, if false QuestionScreen() pointer is passed which uses the QuestionScreen widget/page
+
 ---
 
 ## misc
