@@ -28,10 +28,10 @@ Flutter uses Material app for its design - developed my Google to be used for fl
 A set of suggestions and guidelines provided by Google to aid in app dev
 Customizable and easy to extend on top of base code/ideas
 
-#### notes
+#### .
 
 if you want to publish/release the app for a specific platform the files within the directory become relevant then i.e:
-![alt text](image.png)
+![alt text](.\images\image.png)
 
 flutter apps become active by the following steps:
 
@@ -70,7 +70,7 @@ code is parsed from the top to the bottom of the script
 it is translated to a language that is suitable to the target platform - compiled into native code for target platform
 then the compiled code is executed on target platform
 
-![alt text](image-1.png)
+![alt text](.\images\image-1.png)
 
 const helps to improve performance. it allows objects defined by const to be reused, improving memory efficiency and hence improving performance - that would be the crude explanation
 
@@ -236,9 +236,9 @@ makes it easier to manipulate and work on files as well as keeping the files lea
 
 looking at file structure and imports:
 
-![alt text](image-4.png)
-![alt text](image-5.png)
-![alt text](image-6.png)
+![alt text](.\images\image-4.png)
+![alt text](.\images\image-5.png)
+![alt text](.\images\image-6.png)
 
 ###### variables
 
@@ -467,13 +467,13 @@ depending on what the user chooses from main.dart as their GradientContainer.<co
 ###### adding assets
 
 to add assets you would ideally create a new folder within project folder called assets, since we are using images, another subfolder called images
-![alt text](image-7.png)
+![alt text](.\images\image-7.png)
 
 inside the pubspec.yaml file, there is a section that looks like this:
-![alt text](image-8.png)
+![alt text](.\images\image-8.png)
 
 change it to target your image assets:
-![alt text](image-9.png)
+![alt text](.\images\image-9.png)
 
 specify their path, and with the correct vs extension you should even be able to see a preview of the image
 
@@ -636,8 +636,4 @@ use "R" in terminal that you used to launch flutter to reload the code into app 
 select widget, right click and choose refactor, it gives you smart suggestions
 
 add commas to the end of brackets and format document to get it auto commented to some extent and amended structure
-![alt text](image-2.png)
-
-```
-
-```
+![alt text](.\images\image-2.png)
