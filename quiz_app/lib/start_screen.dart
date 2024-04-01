@@ -1,10 +1,12 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
+import "package:quiz_app/quiz.dart";
 
 // creating a start screen widget as it is the norm to keep widgets and components that are not universal separate from the main
 class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+  const StartScreen(this.startQuiz, {super.key});
+
+  // need to declare the variable startQuiz, can be final as it only needs to be set once when the widget/function is called
+  final void Function() startQuiz;
 
   @override
   Widget build(context) {
@@ -39,7 +41,10 @@ class StartScreen extends StatelessWidget {
             height: 30,
           ),
           OutlinedButton.icon(
-            onPressed: () {},
+            // onPressed: () { // anon function
+            //   startQuiz();
+            // },
+            onPressed: startQuiz, // pointer method
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.all(15),
               foregroundColor: Colors.white,
@@ -55,19 +60,3 @@ class StartScreen extends StatelessWidget {
     );
   }
 }
-
-// import "package:flutter/material.dart"; // importing material.dart lib
-
-// // creating a start screen widget as it is the norm to keep widgets and components that are not universal separate from the main
-// class StartScreen extends StatelessWidget {
-//   const StartScreen({super.key});
-
-//   @override
-//   Widget build(context) {
-//     return const Center(
-//         child: Text(
-//             "Start Screen")); // center forces the Text child to take over the entire screen as there is no space constaints
-//     // since the background color from main is applies to the container which start_screen is contained in,
-//     // when it expands the background expands to cover the entire screen available as well
-//   }
-// }

@@ -692,6 +692,60 @@ however to avoid that resource intense steps, an alternative is to use argb colo
 
 ##### rendering content conditionally
 
+you can set widgets to be contained within a variable such that it can be assigned and called and changed
+
+```dart
+class _QuizState extends State<Quiz> {
+  // you can store widgets in variables as widgets are technically a data type and a value - you cannot use var as its restrictive due to the class properties not being identical, hence you need to use widget to keep the variable less restrictive
+
+  Widget activeScreen = const StartScreen(
+      switchScreen); // passes a pointer to link with switchScreen - avoid using brackets as that will call it which is not the intention
+
+
+  void switchScreen() {
+    setState(() {
+      activeScreen = const QuestionScreen();
+    });
+  }
+ // this anonymous function executes and changes that are meant to be displayed in the user interface
+
+  @override
+  Widget build(context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            // using const here as all the widgets and values contained within fall under the constant type
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 78, 13, 151),
+                Color.fromARGB(255, 107, 15, 168),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child:
+              activeScreen, // StartScreen uses center to force the child to use all available space
+        ),
+      ),
+    );
+  }
+}
+```
+
+using variables is one way of rendering widgets conditionally but not the only way
+
+##### lifting states
+
+lifting states goes hand in hand with rendering content and in our case from above, rendering content conditionally.
+
+annotations on code have been done to explain what is going on and where it is going on.
+
+you may need to create initialization methods to help order and manage the function calls and assignments best scene in quiz.dart
+
+![alt text](.\images\image-14.png)
+
 ---
 
 ## misc
@@ -712,4 +766,8 @@ and setting states:
 ![alt text](.\images\image-13.png)
 ![alt text](.\images\image-12.png)
 
----
+when creating init for classes, you can use "init" shorthand to get the needed function
+
+## image notes:
+
+![alt text](.\images\image-15.png)
