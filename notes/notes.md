@@ -998,6 +998,49 @@ Class _QuizState extends State<Quiz> {
 
 ```
 
+you can use if statements for checking conditions if you want to avoid the variable method and different variations of ternary statements.
+
+```dart
+class _QuizState extends State<Quiz> {
+  var activeScreen = "start-screen"; // mapping active screen to a string
+
+  void switchScreen() {
+    setState(() {
+      activeScreen =
+          "question-screen"; // mapping the new active screen to question screen, its easier to read and digest as a human
+    });
+  }
+
+  @override
+  Widget build(context) {
+    Widget screenWidget = StartScreen(switchScreen); // declared as a Widget type, to allow it to have more flexibility
+
+    if (activeScreen == "question-screen") { // checks for condition inside brackets
+      screenWidget = const QuestionScreen(); // executes this if the conditions are met
+    }
+
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 78, 13, 151),
+                Color.fromARGB(255, 107, 15, 168),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: screenWidget, // changes screenWidget and by extension the value of child based on the condition above
+        ),
+      ),
+    );
+  }
+}
+
+```
+
 ---
 
 ## misc
