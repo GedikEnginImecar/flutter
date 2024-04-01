@@ -14,6 +14,48 @@
 
 ---
 
+## What is ---?
+
+### Dart
+
+Dart is a type safe, general purpose programming language. It is designed with fast/accelerated app building in mind for multiple platforms.
+
+It is developed by Google as an alternative to JavaScript with its own virtual machine to run apps within the browser. It later got adopted by the flutter framework after its unsteady initial start.
+
+It is unique in the way such that it can compile in multiple machine code languages for different platforms such as:
+
+- arm and x64 machine code for mobile devices,
+- javascript for browsers
+- self contained executables for Windows, macOS, Linux systems
+
+It has a Just-In-Time compiler so it gets compiled on the fly allowing for hot reloads and avoiding fully restarting the app.
+
+All dart code runs inside an isolate; which is similar to a chunk of memory running in single thread loop, allowing it to perform asynchronous background work on a single thread, but it also allows you to spawn multiple isolates to run in parallel with each other benefitting from parallelism and multithreading.
+
+Its type safe language - variable values matches its static type, however it is flexible so it permits the use of dynamic types and runtime checks when needed. It also has null safety, preventing variables to be inferred as null, unless stated otherwise.
+
+Dart is not restricted to client-side usage. It can be used in conjunction with API's such as Aqueduct (being the most prominent one), Shelf, Angel and its own built in HTTP server (which is more restrictive than the aforementioned alternatives). Alternatively you can utilize the Angular framework, AngularDart; which can be seen as the Dart variant of React.js, used to create reactive and more advanced web applications. This allows Dart to be used in cases where a database might be needed with the implementation of suitable frameworks and API's
+
+It is linked with a package manager called pub, which is open source and has an active community.
+
+### Flutter
+
+Flutter is a user interface (UI) framework that is designed for Android, iOS, browser and desktop platforms. The flutter engine is primarily C++ driven, providing low-level rendering support for Skia graphics (developed by Google, designed as an open source 2D graphics library) or a custom Impeller graphics, a graphics layer developed by Flutter to help optimize and provide additional features. It also interfaces (interacts and can utilize) with platform specific Software-Development-Kit's (Android and iOS) to allow the use of their own/unique features and attributes, such as I/O systems, sensors, file etc. It also has support for native plugins, allowing platform specific features to be utilized and integrated to the Flutter application without being directly supported by the Flutter engine itself.
+
+Flutter has a similar logic to JavaScript DOM's (Document Object Model) in terms of creating a UI, but differ in their implementation. Flutter's Widget Trees use a hierarchical structure, where a series of widgets are put together to create a larger widget, a collection of larger widgets are then combined to create an even bigger widget and so on.
+
+The widget tree is immutable, meaning it cannot be altered once it is created. If there is a state change the entire tree is reloaded. Whilst it may seem inefficient the Flutter/Dart framework is designed with this execution in place, hence it is optimized and is not as hindered as other solutions (DOM's) when reloading the tree. The algorithm (Flutter's reconciliation algorithm) that is used to reload the widget tree is designed to use minimal resources, keeping the overheads low. The Flutter widget tree is independent, meaning that the same codebase can be used for different platforms allowing one code to be compatible with multiple platforms.
+
+There is an important library to mention, GetX. Whilst Flutter is optimized for reloading the entire widget tree, the GetX library takes it a step further and allows allows the widget tree to function more like a Virtual DOM. This means that instead of reloading the entire widget tree from scratch, similar to a regular DOM, it compares the current state and the "target" state, identifies the differences present and only changes the widgets that have been altered.
+
+Flutter widgets have 2 main families: StatefulWidget's and StatelessWidget's.
+
+Stateless widgets cannot be altered once they are created for the remainder of their life cycle. They override the build() method and then are defined to create the UI. Stateless widgets can get rebuilt when their parent widget is rebuild, as this creates a new instance of the sub-widget. They are suitable for displaying information, icons, buttons and similar UI components that are not expected to change, or their changes are dependant on the parent, which would cause them to be rebuilt with the new content anyway
+
+Stateful widgets can be altered and manipulated once they are built, meaning that they are in a mutable state. They can dynamically respond to changes in data, conditions and inputs. They have a dedicated method that is used to change their state "setState()". They are traditionally used in scenarios where they actively undergo change and may be interacted with, such as displaying live data and handling dynamic user inputs (slider bars, counters etc.)
+
+The Flutter/Dart framework is designed to be very efficient to allow the development of applications fast. There are multiple features such as easy refactoring options that can be used to encapsulate existing widgets and perform hot reloads which prevent the developer needing to reload an entire app, but rather execute a hot reload. Hot reload allows the app to preserve its state when there is a code update going on, meaning that the navigation stack, inputs and data passed in, etc are all still present. It is responsive and allows changes made to the code be seen immediately once the reload is completed.
+
 ## theory
 
 #### main points
@@ -1041,6 +1083,8 @@ class _QuizState extends State<Quiz> {
 
 ```
 
+##### Blueprints
+
 ---
 
 ## misc
@@ -1065,4 +1109,11 @@ when creating init for classes, you can use "init" shorthand to get the needed f
 
 ## image notes:
 
+life cycle of StatefulWidget's :
 ![alt text](.\images\image-15.png)
+
+if statements with lists:
+![alt text](.\images\image-16.png)
+
+if statements and comparison operators:
+![alt text](.\images\image-17.png)
