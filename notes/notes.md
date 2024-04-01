@@ -955,6 +955,49 @@ and the result of the condition check is passed into the child argument, if true
 
 the benefit of using ternary expressions is that it does not require initializing with how its done
 
+an alternative to ternary expressions being embedded into the child directly, you can declare and manipulate the widget that is passed into it by moving the ternary statement to the start of the widget
+
+```dart
+
+Class _QuizState extends State<Quiz> {
+  var activeScreen = "start-screen"; // mapping active screen to a string
+
+  void switchScreen() {
+    setState(() {
+      activeScreen =
+          "question-screen"; // mapping the new active screen to question screen, its easier to read and digest as a human
+    });
+  }
+
+  @override
+  Widget build(context) {
+    final screenWidget = activeScreen == "start-screen" // <-- creating a final variable as it only is meant to be declared/change once
+        ? StartScreen(switchScreen)
+        : const QuestionScreen();
+    // the conditions work the same as the aforementioned ternary statement
+
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 78, 13, 151),
+                Color.fromARGB(255, 107, 15, 168),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: screenWidget,
+        ),
+      ),
+    );
+  }
+}
+
+```
+
 ---
 
 ## misc
