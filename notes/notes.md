@@ -28,7 +28,7 @@ Flutter uses Material app for its design - developed my Google to be used for fl
 A set of suggestions and guidelines provided by Google to aid in app dev
 Customizable and easy to extend on top of base code/ideas
 
-#### .
+####
 
 if you want to publish/release the app for a specific platform the files within the directory become relevant then i.e:
 ![alt text](.\images\image.png)
@@ -627,6 +627,71 @@ class GradientContainer extends StatelessWidget {
 
 ```
 
+There is an additional button style from flutter widgets:
+It is a generic button with an outline similar to elevated button
+
+```dart
+ OutlinedButton(
+            onPressed: () {},
+            style: OutlinedButton.styleFrom(
+              padding: const EdgeInsets.all(20),
+              foregroundColor: Colors.white,
+              backgroundColor: const Color.fromARGB(50, 0, 0, 0),
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            child: const Text("Start Quiz"),
+          )
+```
+
+##### Advanced widgets:
+
+You can add little icons to widgets and buttons:
+for a button:
+
+```dart
+OutlinedButton.icon(
+  onPressed: () {},
+  style: OutlinedButton.styleFrom(
+    padding: const EdgeInsets.all(15),
+    foregroundColor: Colors.white,
+    backgroundColor: const Color.fromARGB(50, 0, 0, 0),
+    textStyle: const TextStyle(fontSize: 15),
+  ),
+  icon: const Icon(Icons
+      .arrow_right), // when using an icon in a button, you need to provide an icon widget
+  label: const Text("Start Quiz") // and you replace child with label
+)
+```
+
+You can also toggle the visibility/opacity of a widget, however it is resource intensive and should be avoided where possible
+
+```dart
+ Widget build(context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Opacity(
+            opacity: 0.5,
+            child: Image.asset("assets/images/quiz-logo.png",
+                width: MediaQuery.of(context).size.width * 0.5,
+                height: MediaQuery.of(context).size.height * 0.5),
+)]))}
+```
+
+however to avoid that resource intense steps, an alternative is to use argb color styling to manipulate the transparency:
+
+```dart
+          Image.asset(
+            "assets/images/quiz-logo.png",
+            width: MediaQuery.of(context).size.width * 0.5,
+            height: MediaQuery.of(context).size.height * 0.5,
+            color: const Color.fromARGB(150, 255, 255, 255),
+          ),
+```
+
+##### rendering content conditionally
+
 ---
 
 ## misc
@@ -637,3 +702,14 @@ select widget, right click and choose refactor, it gives you smart suggestions
 
 add commas to the end of brackets and format document to get it auto commented to some extent and amended structure
 ![alt text](.\images\image-2.png)
+
+when creating classes you can use auto completion:
+![alt text](.\images\image-10.png)
+![alt text](.\images\image-11.png)
+
+and setting states:
+
+![alt text](.\images\image-13.png)
+![alt text](.\images\image-12.png)
+
+---
