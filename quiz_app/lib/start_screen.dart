@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:quiz_app/quiz.dart";
 
 // creating a start screen widget as it is the norm to keep widgets and components that are not universal separate from the main
 class StartScreen extends StatelessWidget {
