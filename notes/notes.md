@@ -953,6 +953,8 @@ example usage/breakdown is:
 
 and the result of the condition check is passed into the child argument, if true StartScreen(switchScreen) is passed into child, if false QuestionScreen() pointer is passed which uses the QuestionScreen widget/page
 
+the benefit of using ternary expressions is that it does not require initializing with how its done
+
 ---
 
 ## misc
