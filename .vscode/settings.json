@@ -84,7 +84,7 @@
 		"first_app/android/**/GeneratedPluginRegistrant.java": true,
 		"first_app/android/**/key.properties": true,
 		"first_app/android/**/*.keystore": true,
-		"first_app/android/**/*.jks": true
+		"first_app/android/**/*.jks": true,
 		"first_app/archive": true
 	}
 }
