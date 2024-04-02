@@ -1,16 +1,19 @@
 // results_screen.dart
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import "package:quiz_app/data/questions.dart";
-import 'package:quiz_app/questions_summary.dart';
+import 'package:quiz_app/questions_summary/questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.chosenAnswers});
+  const ResultsScreen({
+    super.key,
+    required this.chosenAnswers,
+    required this.onRestart,
+  });
 
-  // const ResultsScreen({super.key, required this.chosenAnswers, required this.startQuiz});
-  // final void Function() startQuiz;
-
+  final void Function() onRestart;
   final List<String> chosenAnswers;
 
 // List<Map> means that getSummaryData returns a list of Map data composed of strings and objects (objects are flexible data types)
@@ -59,6 +62,11 @@ class ResultsScreen extends StatelessWidget {
           children: [
             Text(
               "You answered $numCorrectQuestions out of $numTotalQuestions correctly!",
+              style: GoogleFonts.architectsDaughter(
+                color: const Color.fromARGB(255, 238, 197, 255),
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 30,
@@ -71,7 +79,7 @@ class ResultsScreen extends StatelessWidget {
             ),
             OutlinedButton.icon(
               // onPressed: startQuiz, // pointer method
-              onPressed: () {}, // pointer method
+              onPressed: onRestart, // pointer method
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.all(15),
                 foregroundColor: Colors.white,

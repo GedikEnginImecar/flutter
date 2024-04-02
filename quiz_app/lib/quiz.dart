@@ -16,10 +16,10 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  var activeScreen = "start-screen";
+
   List<String> selectedAnswers = [];
   // creating a list for the answers selected, you can use final as you won't be reassigning it, but rather adding to it
-
-  var activeScreen = "start-screen";
 
   void switchScreen() {
     setState(() {
@@ -31,12 +31,17 @@ class _QuizState extends State<Quiz> {
     selectedAnswers.add(answer); // built in dart list adding - aka appending
 
     if (selectedAnswers.length == questions.length) {
-      setState(
-        () {
-          activeScreen = "results-screen";
-        },
-      );
+      setState(() {
+        activeScreen = "results-screen";
+      });
     }
+  }
+
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'questions-screen';
+    });
   }
 
   @override
@@ -46,7 +51,10 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == "question-screen") {
       screenWidget = QuestionScreen(onSelectAnswer: chooseAnswer);
     } else if (activeScreen == "results-screen") {
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswers,
+        onRestart: restartQuiz,
+      );
     }
 
     return MaterialApp(
