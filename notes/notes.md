@@ -217,6 +217,25 @@ better practice for creating and managing widgets is to isolate them, similar to
 
 to do this you would need to take a smaller section of the tree i.e. container, and break it up into smaller branches which leads to classes and custom widgets:
 
+---
+
+for instances where you have a set height, and want content to be scrollable if it exceeds it:
+
+```dart
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300, // sets a height of 300 for this widget
+      // height: MediaQuery.of(context).size.height * 0.6,
+      child: SingleChildScrollView( // allows the children of this widget to be scrollable
+        child: Column(
+          // children go in here
+        )
+      )
+    )
+  }
+```
+
 ###### classes and custom widgets
 
 classes are used to separate widget trees from the main code to make it modular. similar to solid and kiss programming principles. having one module for background allows you to use it in different apps, different pages of the same app, different containers within one page of the app etc.
