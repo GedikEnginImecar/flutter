@@ -1085,6 +1085,8 @@ class _QuizState extends State<Quiz> {
 
 ##### Blueprints
 
+Blueprints in Flutter act as a structure/template for a widget or object. They can be similar to classes in other languages like Python3 OOP, or custom data type, Struct, in C++. It provides an available template to use easily with properties you can define or are pre-defined.
+
 ---
 
 ## misc
