@@ -57,10 +57,10 @@
 		"first_app/ios/Flutter/flutter_export_environment.sh": true,
 		"first_app/ios/**/ServiceDefinitions.json": true,
 		"first_app/ios/Runner/GeneratedPluginRegistrant.*": true,
-		"first_app/ios/**/default.mode1v3": false,
-		"first_app/ios/**/default.mode2v3": false,
-		"first_app/ios/**/default.pbxuser": false,
-		"first_app/ios/**/default.perspectivev3": false,
+		"first_app/ios/**/default.mode1v3": false, //False
+		"first_app/ios/**/default.mode2v3": false, // False
+		"first_app/ios/**/default.pbxuser": false, // False
+		"first_app/ios/**/default.perspectivev3": true,
 		"first_app/macos/**/Flutter/ephemeral/": true,
 		"first_app/macos/**/Pods/": true,
 		"first_app/macos/**/dgph": true,
@@ -74,7 +74,7 @@
 		"first_app/windows/**/x64/": true,
 		"first_app/windows/**/x86/": true,
 		"first_app/windows/**/*.[Cc]ache": true,
-		"first_app/windows/**/*.[Cc]ache/": false,
+		"first_app/windows/**/*.[Cc]ache/": true,
 		"first_app/android/**/gradle-wrapper.jar": true,
 		"first_app/android/.gradle": true,
 		"first_app/android/captures/": true,
