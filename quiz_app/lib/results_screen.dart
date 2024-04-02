@@ -1,6 +1,7 @@
 // results_screen.dart
 
 import 'package:flutter/material.dart';
+
 import "package:quiz_app/data/questions.dart";
 import 'package:quiz_app/questions_summary.dart';
 
@@ -24,21 +25,31 @@ class ResultsScreen extends StatelessWidget {
         {
           "question_index": i,
           // i will reflect the index/number of the question
-          "question": questions[i]
-              .text, // the i numbered question test (actual question)
+
+          "question": questions[i].text,
+          // the i numbered question test (actual question)
+
           "question_answer": questions[i].answers[0],
           // the i numbered questions, answer lists 0 index (in the questions.dart it is designed such that questions.answer[0] is always the correct one)
+
           "user_answer": chosenAnswers[i],
           // the user answer to the question numbered i
         },
       );
     }
-
     return summary;
   }
 
   @override
   Widget build(BuildContext context) {
+    // to dynamically get the amount of total questions and correct questions
+    final summaryData = getSummaryData();
+
+    final numTotalQuestions = questions.length;
+    final numCorrectQuestions = summaryData.where((data) {
+      return data["user_answer"] == data["question_answer"];
+    }).length;
+
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -46,12 +57,14 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("You answered x out of y correctly!"),
+            Text(
+              "You answered $numCorrectQuestions out of $numTotalQuestions correctly!",
+            ),
             const SizedBox(
               height: 30,
             ),
             //
-            QuestionsSummary(getSummaryData()),
+            QuestionsSummary(summaryData),
             //
             const SizedBox(
               height: 30,

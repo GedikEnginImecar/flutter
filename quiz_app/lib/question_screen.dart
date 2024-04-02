@@ -24,7 +24,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
     // built in dart/flutter widget property, the onSelectAnswer is initialized in the widget class above not the protected method
     // using widget.onSelectAnswer allows you to access it in the private class without having it present in the private class
     widget.onSelectAnswer(
-        "..."); // function that is a function from QuestionScreen widget but made available by using widget property from dart/flutter
+        selectedAnswers); // function that is a function from QuestionScreen widget but made available by using widget property from dart/flutter
     // currentQuestionIndex = currentQuestionIndex + 1;
     // currentQuestionIndex += 1;
     setState(() {
@@ -48,13 +48,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Text(
-            //   textAlign: TextAlign.center,
-            //   currentQuestion.text,
-            //   style: const TextStyle(
-            //     color: Colors.white,
-            //     fontSize: 20,
-            //   ),
             Text(
               textAlign: TextAlign.center,
               currentQuestion.text,
@@ -74,6 +67,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   // however it is a pointer so it does not take in a string like we are trying to pass and append to the selected answers list.
                   onTap: () {
                     // so you use an anon function to call answerQuestion method and pass selected answer into it
+                    print(answer);
                     answerQuestion(answer);
                   },
                 );
