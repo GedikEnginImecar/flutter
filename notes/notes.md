@@ -1080,7 +1080,6 @@ class _QuizState extends State<Quiz> {
     );
   }
 }
-
 ```
 
 ##### Blueprints
@@ -1116,6 +1115,171 @@ and the usage of that method would be:
 ),
 ```
 
+do not forget to map the actions for the blueprints and functions you may be using:
+
+```dart
+import 'package:flutter/material.dart';
+
+class AnswerButton extends StatelessWidget {
+  // using name arguments, Flutter does not have name args mandatory so you have to declare them as such
+  const AnswerButton({
+    super.key,
+    required this.answerText, // requiring these name params
+    required this.onTap,
+  });
+
+  final String answerText; // establishing data type and state
+  final void Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onTap, // mapping the onPressed to onTap
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+        backgroundColor: const Color.fromARGB(255, 94, 1, 97),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40),
+        ),
+      ),
+      child: Text(
+        answerText,
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+```
+
+##### 3rd party packages
+
+When installing 3rd party packages using Flutter, pub being the package manager, you can treat it similar to pip and NodeJs;
+
+For example to install Google Fonts,
+
+```cmd
+flutter pub add google_fonts
+```
+
+and add the dependency to the pubspec.yaml file:
+
+![alt text](./images/image-18.png)
+
+and then you would need to import them and to call them:
+
+```dart
+// import
+import "package:google_fonts/google_fonts.dart";
+
+// usage
+Text(
+              textAlign: TextAlign.center,
+              currentQuestion.text,
+              style: GoogleFonts.gloriaHallelujah(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+
+```
+
+##### breakdown of a section of code for clarity
+
+```dart
+...currentQuestion.getShuffledAnswers().map( // maps the list of shuffled answers (with value answer - which is an option to select as a response to the question) and creates a number of AnswerButton instances (ElevatedButton with custom properties) meaning if there are 6 possible answers there will be 6 answer buttons, 2 answer options mean 2 answer buttons
+  (answer) {
+    return AnswerButton( // returns the AnswerButton widget
+      answerText: answer, // where the text of the answerButton is answer, assigned to answerText
+      onTap: () { // when tapped
+        answerQuestion(answer); // it calls answerQuestion method instead of using the pointer as before, and passes the answer selected since thats the value linked to the button
+      },
+    );
+  },
+),
+```
+
+##### mapping, for loops, dictionaries
+
+an example of a loop, appending to a list after mapping values based on the loops index and corresponding indexes
+
+```dart
+// results_screen.dart
+
+class ResultsScreen extends StatelessWidget {
+  const ResultsScreen({super.key, required this.chosenAnswers});
+
+  final List<String> chosenAnswers;
+
+// List<Map> means that getSummaryData returns a list of Map data composed of strings and objects (objects are flexible data types)
+  List<Map<String, Object>> getSummaryData() {
+    final List<Map<String, Object>> summary = [];
+    // creating a final variable of type List<Map<String, Object>>
+
+    // for (range/config goes in here(start variable/range ; comparison condition ; how range should be manipulated )){the code to execute while running}
+    for (var i = 0; i < chosenAnswers.length; i++) {
+      // creating a dictionary/value key pairs
+      summary.add(
+        {
+          "question_index": i,
+          // i will reflect the index/number of the question
+          "question": questions[i]
+              .text, // the i numbered question test (actual question)
+          "question_answer": questions[i].answers[0],
+          // the i numbered questions, answer lists 0 index (in the questions.dart it is designed such that questions.answer[0] is always the correct one)
+          "user_answer": chosenAnswers[i],
+          // the user answer to the question numbered i
+        },
+      );
+    }
+
+    return summary;
+  }
+}
+```
+
+example usage of displaying data based on passed data through a class:
+
+```dart
+class QuestionsSummary extends StatelessWidget {
+  const QuestionsSummary(this.summaryData, {super.key});
+
+  final List<Map<String, Object>> summaryData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      // using summaryData.map allows you to not manually declare each children for column, but rather create them dynamically based on the amount of data contained/passed via summaryData
+      children: summaryData.map(
+        (data) {
+          return Row(
+            children: [
+              // it is passed as an object, so you take it as an integer increment it, then convert it into a string
+              // this is called type casting
+              Text(((data["question_index"] as int) + 1).toString()),
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(data["question"] as String),
+                    const SizedBox(height: 7),
+                    Text(data["question_answer"] as String),
+                    const SizedBox(height: 3),
+                    Text(data["user_answer"] as String),
+                  ],
+                ),
+              )
+            ],
+          );
+        },
+      ).toList(), // as the widgets want list type, and .map provides an iterable type, you need to reassign the data type
+    );
+  }
+}
+
+```
+
 ---
 
 ## misc
@@ -1138,6 +1302,10 @@ and setting states:
 
 when creating init for classes, you can use "init" shorthand to get the needed function
 
+---
+
+difference between name arguments and positional arguments in constructor methods is that in positional the order they are passed matters when the variables types are assigned after them, name just requires them to have matching names
+
 ## image notes:
 
 life cycle of StatefulWidget's :
@@ -1149,6 +1317,5 @@ if statements with lists:
 if statements and comparison operators:
 ![alt text](.\images\image-17.png)
 
-```
-
-```
+using for loops in lists:
+![alt text](.\images\image-19.png)
