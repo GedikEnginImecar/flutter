@@ -1087,6 +1087,35 @@ class _QuizState extends State<Quiz> {
 
 Blueprints in Flutter act as a structure/template for a widget or object. They can be similar to classes in other languages like Python3 OOP, or custom data type, Struct, in C++. It provides an available template to use easily with properties you can define or are pre-defined.
 
+```dart
+// regular class to act as a blueprint -
+class QuizQuestion { // the blueprint class being created
+  const QuizQuestion(this.text,
+      this.answers); // constructor function to map values to receive values and map to the properties below, it should be a const as it should not change
+
+  final String text; // creates final variable for string text
+  final List<String> answers; // creates a list of strings for answers
+
+  // used in tandem with mapping,
+  List<String> getShuffledAnswers() { // list of strings method to
+    final shuffledList = List.of(answers); // mirror the original list of answers
+    shuffledList.shuffle(); // shuffles the of answers
+    return shuffledList; // returns them
+  }
+}
+```
+
+and the usage of that method would be:
+
+```dart
+  ...currentQuestion.getShuffledAnswers().map(
+  // flutters built in spreading method. pulls them out of an iterable list and puts them in a comma separated values in the code
+  (answer) {
+  return AnswerButton(answerText: answer, onTap: () {});
+  },
+),
+```
+
 ---
 
 ## misc
@@ -1119,3 +1148,7 @@ if statements with lists:
 
 if statements and comparison operators:
 ![alt text](.\images\image-17.png)
+
+```
+
+```

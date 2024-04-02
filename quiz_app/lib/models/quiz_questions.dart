@@ -1,4 +1,4 @@
-// questions.dart
+// quiz_questions.dart
 
 // regular class to act as a blueprint -
 class QuizQuestion {
@@ -7,4 +7,10 @@ class QuizQuestion {
 
   final String text;
   final List<String> answers; // creates a list of strings for answers
+
+  List<String> getShuffledAnswers() {
+    final shuffledList = List.of(answers);
+    shuffledList.shuffle();
+    return shuffledList;
+  }
 }
